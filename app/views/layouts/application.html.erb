@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Loja</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  <div class="container">
+  <nav class="navbar navbar-dark bg-dark">
+  <a class="navbar navbar-dark bg-dark" href="/">Minha Loja</a>
+    <% if user_signed_in? %>
+    Logged in as <strong><%= current_user.email %></strong>.
+    <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+    <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+    <% else %>
+    <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+    <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+    <% end %>
+  </nav>
+   
+<% unless flash.empty? %>
+     <script type="text/javascript">
+          <% flash.each do |f| %>
+	      <% type = f[0].to_s.gsub('alert', 'error').gsub('notice', 'info') %>
+	     	 toastr['<%= type %>']('<%= f[1] %>');
+	   <% end %>
+     </script>
+<% end %>
+    <%= yield %>
+  </div>  
+  </body>
+</html>

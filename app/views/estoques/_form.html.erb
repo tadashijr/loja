@@ -1,0 +1,42 @@
+<%= form_with(model: estoque, local: true) do |form| %>
+  <% if estoque.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(estoque.errors.count, "error") %> prohibited this estoque from being saved:</h2>
+
+      <ul>
+      <% estoque.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :nome %>
+    <%= form.text_field :nome, id: :estoque_nome %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :descricao %>
+    <%= form.text_area :descricao, id: :estoque_descricao %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :valor %>
+    <%= form.text_field :valor, id: :estoque_valor %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :quantidade %>
+    <%= form.number_field :quantidade, id: :estoque_quantidade %>
+  </div>
+
+  <div class="field">
+    <%= form.label :grupo %>
+    <%= form.text_field :grupo, id: :estoque_grupo %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
